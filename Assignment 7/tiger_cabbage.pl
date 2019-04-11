@@ -26,13 +26,16 @@ execmove([M, T, G, C], 1, [NM, NT, NG, NC]) :- M = G, % man's current state is g
                                                NT = T, % new state of tiger (not updated), we do this before goat so that tiger does not eat it.
                                                cross(G, NG),
                                                NC = C.
-execmove([F, W, G, C], 2, [NF, NW, NG, NC]) :- F = C,
-                                               cross(F, NF),
-                                               NW = W,
+                                               
+% Plan if man crosses the river along with the cabbage
+execmove([M, T, G, C], 2, [NM, NT, NG, NC]) :- M = C,
+                                               cross(M, NM),
+                                               NT = T,
                                                NG = G,
                                                cross(C, NC).
-execmove([F, W, G, C], 3, [NF, NW, NG, NC]) :- cross(F, NF),
-                                               NW = W,
+% Only the man crosses the river alone.
+execmove([M, T, G, C], 3, [NM, NT, NG, NC]) :- cross(M, NM),
+                                               NT = T,
                                                NG = G,
                                                NC = C.
 
