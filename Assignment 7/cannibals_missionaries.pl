@@ -25,8 +25,8 @@ move([CL,ML,left,CR,MR],[CL2,ML,right,CR2,MR]):-
 	CL2 is CL-2,
 	legal(CL2,ML,CR2,MR).
 
+%  One missionary and one cannibal cross left to right.
 move([CL,ML,left,CR,MR],[CL2,ML2,right,CR2,MR2]):-
-	%  One missionary and one cannibal cross left to right.
 	CR2 is CR+1,
 	CL2 is CL-1,
 	MR2 is MR+1,
