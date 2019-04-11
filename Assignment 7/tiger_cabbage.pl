@@ -21,9 +21,9 @@ execmove([M, T, G, C], 0, [NM, NT, NG, NC]) :- M = T, % man's current state is t
                                                NC = C.
                                                
 % Plan if man crosses the river along with the goat
-execmove([M, T, G, C], 1, [NM, NT, NG, NC]) :- M = G,
+execmove([M, T, G, C], 1, [NM, NT, NG, NC]) :- M = G, % man's current state is goat's current state
                                                cross(M, NM),
-                                               NW = W,
+                                               NT = T, % new state of tiger (not updated), we do this before goat so that tiger does not eat it.
                                                cross(G, NG),
                                                NC = C.
 execmove([F, W, G, C], 2, [NF, NW, NG, NC]) :- F = C,
