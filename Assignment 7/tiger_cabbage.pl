@@ -14,46 +14,54 @@ cross(e, w).
 % T = current state of tiger
 % NT = new state of tiger
 
-execmove([M, T, G, C], 0, [NM, NT, NG, NC]) :- M = T, % man's current state is tiger's current state
-                                               cross(M, NM),
-                                               cross(T, NT),
-                                               NG = G, % new state of cabbage and goat is same as before(not updated)
-                                               NC = C.
+execmove([M, T, G, C], 0, [NM, NT, NG, NC]) :- 
+    M = T, % man's current state is tiger's current state
+    cross(M, NM),
+    cross(T, NT),
+    NG = G, % new state of cabbage and goat is same as before(not updated)
+    NC = C.
                                                
 % Plan if man crosses the river along with the goat
-execmove([M, T, G, C], 1, [NM, NT, NG, NC]) :- M = G, % man's current state is goat's current state
-                                               cross(M, NM),
-                                               NT = T, % new state of tiger (not updated), we do this before goat so that tiger does not eat it.
-                                               cross(G, NG),
-                                               NC = C.
+execmove([M, T, G, C], 1, [NM, NT, NG, NC]) :- 
+    M = G, % man's current state is goat's current state
+    cross(M, NM),
+    NT = T, % new state of tiger (not updated), we do this before goat so that tiger does not eat it.
+    cross(G, NG),
+    NC = C.
                                                
 % Plan if man crosses the river along with the cabbage
-execmove([M, T, G, C], 2, [NM, NT, NG, NC]) :- M = C,
-                                               cross(M, NM),
-                                               NT = T,
-                                               NG = G,
-                                               cross(C, NC).
+execmove([M, T, G, C], 2, [NM, NT, NG, NC]) :- 
+    M = C,
+    cross(M, NM),
+    NT = T,
+    NG = G,
+    cross(C, NC).
+
 % Only the man crosses the river alone.
-execmove([M, T, G, C], 3, [NM, NT, NG, NC]) :- cross(M, NM),
-                                               NT = T,
-                                               NG = G,
-                                               NC = C.
+execmove([M, T, G, C], 3, [NM, NT, NG, NC]) :- 
+    cross(M, NM),
+    NT = T,
+    NG = G,
+    NC = C.
 
 
 answer([e,e,e,e], []).
-answer(State, [Move|Moves]) :- execmove(State, Move, [M, T, G, C]),
-                               (T \= G; G = M),
-                               (G \= C; C = M),
-                               answer([M, T, G, C], Moves).
+answer(State, [Move|Moves]) :- 
+    execmove(State, Move, [M, T, G, C]),
+    (T \= G; G = M),
+    (G \= C; C = M),
+    answer([M, T, G, C], Moves).
                                
-anshelp(S, L, X) :- length(X, L), answer(S, X);
-                 L2 is L + 1, anshelp(S, L2, X).
+anshelp(S, L, X) :- 
+    length(X, L), answer(S, X);
+    L2 is L + 1, anshelp(S, L2, X).
                  
 getans(S, X) :- anshelp(S, 0, X).
-
-% Prints the possible plans for the man to cross the river.
 printans([]).
 printans([0|T]) :- write('The man takes the tiger across.\n'), printans(T).
 printans([1|T]) :- write('The man takes the goat across.\n'), printans(T).
 printans([2|T]) :- write('The man takes the cabbage across.\n'), printans(T).
 printans([3|T]) :- write('The man crosses alone.\n'), printans(T).
+
+
+% Example - :-getans([w,w,w,w], X), printans(X).
