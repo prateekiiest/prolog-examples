@@ -50,6 +50,8 @@ anshelp(S, L, X) :- length(X, L), answer(S, X);
                  L2 is L + 1, anshelp(S, L2, X).
                  
 getans(S, X) :- anshelp(S, 0, X).
+
+% Prints the possible plans for the man to cross the river.
 printans([]).
 printans([0|T]) :- write('The man takes the tiger across.\n'), printans(T).
 printans([1|T]) :- write('The man takes the goat across.\n'), printans(T).
