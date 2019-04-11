@@ -8,11 +8,16 @@ cross(w, e).
 % State e => State w
 cross(e, w).
 
-% 
-execmove([F, W, G, C], 0, [NF, NW, NG, NC]) :- F = W,
-                                               cross(F, NF),
-                                               cross(W, NW),
-                                               NG = G,
+% Plan if man crosses the river along with the tiger
+% M = current state of man
+% NM = new state of man
+% T = current state of tiger
+% NT = new state of tiger
+
+execmove([M, T, G, C], 0, [NM, NT, NG, NC]) :- M = T, % man's current state is tiger's current state
+                                               cross(M, NM),
+                                               cross(T, NT),
+                                               NG = G, % new state of cabbage and goat is same as before(not updated)
                                                NC = C.
 execmove([F, W, G, C], 1, [NF, NW, NG, NC]) :- F = G,
                                                cross(F, NF),
