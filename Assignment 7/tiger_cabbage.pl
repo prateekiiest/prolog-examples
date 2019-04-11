@@ -19,8 +19,10 @@ execmove([M, T, G, C], 0, [NM, NT, NG, NC]) :- M = T, % man's current state is t
                                                cross(T, NT),
                                                NG = G, % new state of cabbage and goat is same as before(not updated)
                                                NC = C.
-execmove([F, W, G, C], 1, [NF, NW, NG, NC]) :- F = G,
-                                               cross(F, NF),
+                                               
+% Plan if man crosses the river along with the goat
+execmove([M, T, G, C], 1, [NM, NT, NG, NC]) :- M = G,
+                                               cross(M, NM),
                                                NW = W,
                                                cross(G, NG),
                                                NC = C.
