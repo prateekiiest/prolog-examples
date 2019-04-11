@@ -9,17 +9,18 @@ legal(CL,ML,CR,MR) :-
 	
 	ML>=0, CL>=0, MR>=0, CR>=0,
 	(ML>=CL ; ML=0),
-	(MR>=CR ; MR=0).
+	(MR>=CR ; MR=0).  % Missionaries have to outnumber the number of cannibals either side of the bank
 
 % Possible moves:
+
+% Two missionaries cross left to right.
 move([CL,ML,left,CR,MR],[CL,ML2,right,CR,MR2]):-
-	% Two missionaries cross left to right.
 	MR2 is MR+2,
 	ML2 is ML-2,
 	legal(CL,ML2,CR,MR2).
 
+% Two cannibals cross left to right.
 move([CL,ML,left,CR,MR],[CL2,ML,right,CR2,MR]):-
-	% Two cannibals cross left to right.
 	CR2 is CR+2,
 	CL2 is CL-2,
 	legal(CL2,ML,CR2,MR).
