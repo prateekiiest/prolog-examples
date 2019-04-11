@@ -41,10 +41,10 @@ execmove([M, T, G, C], 3, [NM, NT, NG, NC]) :- cross(M, NM),
 
 
 answer([e,e,e,e], []).
-answer(State, [Move|Moves]) :- execmove(State, Move, [F, W, G, C]),
-                               (W \= G; G = F),
-                               (G \= C; C = F),
-                               answer([F, W, G, C], Moves).
+answer(State, [Move|Moves]) :- execmove(State, Move, [M, T, G, C]),
+                               (T \= G; G = M),
+                               (G \= C; C = M),
+                               answer([M, T, G, C], Moves).
                                
 anshelp(S, L, X) :- length(X, L), answer(S, X);
                  L2 is L + 1, anshelp(S, L2, X).
