@@ -1,6 +1,14 @@
+% Whether a given entity can cross the river bank
+
+% if w crosses the river to reach bank e
+% State w => State e
 cross(w, e).
+
+% if e crosses the river to reach bank on the other side w
+% State e => State w
 cross(e, w).
 
+% 
 execmove([F, W, G, C], 0, [NF, NW, NG, NC]) :- F = W,
                                                cross(F, NF),
                                                cross(W, NW),
@@ -37,4 +45,3 @@ printans([0|T]) :- write('The man takes the tiger across.\n'), printans(T).
 printans([1|T]) :- write('The man takes the goat across.\n'), printans(T).
 printans([2|T]) :- write('The man takes the cabbage across.\n'), printans(T).
 printans([3|T]) :- write('The man crosses alone.\n'), printans(T).
-
