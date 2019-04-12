@@ -46,3 +46,4 @@ goto2(State1, Route) :-                     % not goal state, do some work to ge
 
 add(X,L,[X|L]).
 
+% goto(state(atdoor, onfloor, atwindow, hasnot), Route).
