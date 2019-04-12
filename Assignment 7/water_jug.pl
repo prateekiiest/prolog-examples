@@ -1,8 +1,6 @@
-
 start(2,0):-write(' 4lit Jug:   2 | 3lit Jug:   0|\n'),
-            write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'),
-            write('Goal Reached! \n'),
-            write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n').
+           
+            write('Goal Reached! \n').
 start(X,Y):-write(' 4lit Jug:   '),write(X),write('| 3lit Jug:   '),write(Y),write('|\n'),
             write(' Enter the move::'),
             read(N),
@@ -35,3 +33,5 @@ main():-write(' Water Jug Game \n'),
         write(' Enter the move::'),
         read(N),nl,
         contains(0,0,N).
+
+% 1,6,4,8,1,6,4
